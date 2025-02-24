@@ -1,0 +1,8 @@
+# Ignore .NET build files
+bin/
+obj/
+CopilotIndices/
+CopilotModels/
+*.db
+*.db-journal
+.env
