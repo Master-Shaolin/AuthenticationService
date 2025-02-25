@@ -6,3 +6,4 @@ CopilotModels/
 *.db
 *.db-journal
 .env
+/.vs
