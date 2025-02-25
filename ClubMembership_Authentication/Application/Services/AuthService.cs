@@ -1,11 +1,11 @@
 ﻿using ClubMembership_Authentication.API.DTOs;
+using ClubMembership_Authentication.Domain.Common;
 using ClubMembership_Authentication.Domain.Entities;
 using ClubMembership_Authentication.Infrastructure.Repositories;
 using dotenv.net;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace ClubMembership_Authentication.Application.Services
@@ -30,7 +30,7 @@ namespace ClubMembership_Authentication.Application.Services
 
             // Get the "User" role from the database
             var userRole = await _userRepository.GetUserRoleAsync("User") ?? throw new Exception("Default user role not found.");
-            var hashedPassword = HashPassword(registerDto.Password);
+            var hashedPassword = Utils.HashPassword(registerDto.Password);
 
             var user = new User
             {
@@ -93,16 +93,9 @@ namespace ClubMembership_Authentication.Application.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private static string HashPassword(string password)
-        {
-            var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = SHA256.HashData(bytes);
-            return Convert.ToBase64String(hash);
-        }
-
         private static bool VerifyPassword(string password, string hashedPassword)
         {
-            return HashPassword(password) == hashedPassword;
+            return Utils.HashPassword(password) == hashedPassword;
         }
     }
 }
