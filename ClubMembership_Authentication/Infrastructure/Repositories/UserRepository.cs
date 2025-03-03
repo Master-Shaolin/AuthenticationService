@@ -21,5 +21,10 @@ namespace ClubMembership_Authentication.Infrastructure.Repositories
         {
             return await context.Roles.FirstOrDefaultAsync(r => r.Name == roleName);
         }
+
+        public async Task<bool> ExistsAsync(Guid userId)
+        {
+            return await context.Users.AnyAsync(u => u.Id == userId);
+        }
     }
 }

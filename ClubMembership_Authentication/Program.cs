@@ -47,6 +47,9 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Add gRPC services
+builder.Services.AddGrpc();
+
 var app = builder.Build();
 
 // Seed the database
@@ -68,5 +71,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGrpcService<UserServiceGrpc>();
 
 app.Run();
