@@ -6,6 +6,7 @@ namespace ClubMembership_Authentication.Infrastructure.Repositories
     {
         Task<User?> GetByEmailAsync(string email);
         Task AddAsync(User user);
-        Task<Role?> GetUserRoleAsync(string roleName); // New method
+        Task<Role?> GetUserRoleAsync(string roleName);
+        Task<bool> ExistsAsync(Guid userId);
     }
 }

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "ClubMembership_Authentication.gRPC";
+
+service UserService {
+  rpc ValidateUser (ValidateUserRequest) returns (ValidateUserResponse);
+}
+
+message ValidateUserRequest {
+  string user_id = 1;
+}
+
+message ValidateUserResponse {
+  bool exists = 1;
+}
